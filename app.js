@@ -1,4 +1,6 @@
 require('dotenv').config();
+const port = process.env.PORT || 3000
+
 let express = require('express');
 let bodyParser = require('body-parser');
 
@@ -11,10 +13,12 @@ app.use(bodyParser.json());
 
 app.post('/test', (req, res) => {
     let string_to_cut = req.body.string_to_cut;
-    let new_string = ''
-    for (let i = 1; i < (string_to_cut.length)/3; i++) {
+    let new_string = '';
+    for (let i = 1; i < (string_to_cut.length/3)+1; i++) {
         let j = (i*3) - 1;
-        new_string += string_to_cut[j]
+        if( j < string_to_cut.length ){
+            new_string += string_to_cut[j];
+        }
     }
     let test = new Test({
         return_string: new_string
@@ -27,6 +31,6 @@ app.post('/test', (req, res) => {
     });
 });
 
-app.listen(process.env.PORT || 3000, () =>{
-    console.log('Started on port 3000');
+app.listen(port, () =>{
+    console.log(`server have started at port ${port}`);
 });
