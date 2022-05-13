@@ -1,9 +1,10 @@
+require('dotenv').config();
 let mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
 // connecting to mongoDB Atlas Cluster
-const url = process.env.DATABASEURL || 'mongodb://localhost:27017/lyft-interview-test';
+const url = process.env.DATABASEURL;
 
 const connectionParams={
     useNewUrlParser: true,
